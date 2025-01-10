@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VERY early prototype site</title>
+  <title>Prototype Optics Site</title>
   <style>
     body, html {
       margin: 0;
@@ -32,7 +32,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.7);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -48,7 +48,7 @@
       border-radius: 5px;
       cursor: pointer;
       position: absolute;
-      bottom: 10%;
+      bottom: 30%;
       left: 50%;
       transform: translateX(-50%);
     }
@@ -75,8 +75,8 @@
       <source id="video-source" src="https://codehs.com/uploads/9718d24073c4d3ffceb15dfa51faf93e" type="video/mp4">
     </video>
     <div id="overlay" class="overlay">
-      <h1>Functions of the Eye</h1>
-      <button id="start-button" class="button">Start Learning</button>
+      <h1>A Very Serious Exploration of the Human Eye</h1>
+      <button id="start-button" class="button">Change Your <strong>Perspective</strong> Forever</button>
     </div>
   </div>
   
@@ -129,9 +129,9 @@
       nextButton.className = "button";
       nextButton.innerText = "Next";
       nextButton.addEventListener("click", () => {
+        clearUI()
         videoPlayer.loop = false;
         if (transition) {
-        clearUI()
           videoPlayer.onended = () => {
             seamlessPlay(transition);
             videoPlayer.loop = false;
@@ -144,7 +144,6 @@
           };
         } else {
           videoPlayer.onended = () => {
-            clearUI()
             overlay.innerHTML = '<h1>Thanks for Learning</h1><button id="restart-button" class="button">Restart</button>';
             overlay.style.display = "flex";
             document.getElementById("restart-button").addEventListener("click", () => {
