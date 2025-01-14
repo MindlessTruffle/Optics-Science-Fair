@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inside of Eye</title>
+  <title>Eye Functions</title>
   <style>
     body, html {
       margin: 0;
@@ -38,32 +38,27 @@
       justify-content: center;
       align-items: center;
       color: white;
+      z-index: 10;
     }
-    
-    .first_button { 
-      animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both infinite; 
-      background-color: #28a745; 
-      color: white; 
-      border: none; 
-      padding: 15px 30px; 
-      font-size: 18px; 
-      border-radius: 5px; 
-      cursor: pointer; 
-      position: relative;
-      backface-visibility: hidden; 
-      perspective: 1000px; 
-    } 
-    @keyframes shake { 
-      10%, 90% { transform: translate3d(-1px, 0, 0); } 
-      20%, 80% { transform: translate3d(2px, 0, 0); } 
-      30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 
-      40%, 60% { transform: translate3d(4px, 0, 0); } 
+    .first_button {
+      animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both infinite;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
     }
-    
+    @keyframes shake {
+      10%, 90% { transform: translate3d(-1px, 0, 0); }
+      20%, 80% { transform: translate3d(2px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+      40%, 60% { transform: translate3d(4px, 0, 0); }
+    }
     .first_button:hover {
       background-color: #DC143C;
     }
-    
     .button {
       background-color: #28a745;
       color: white;
@@ -73,25 +68,68 @@
       border-radius: 5px;
       cursor: pointer;
       position: absolute;
-      bottom: 50%;
+      bottom: 20px;
       left: 50%;
-      transform: translate(-50%);
+      transform: translateX(-50%);
     }
-    
     .button:hover {
       background-color: #218838;
     }
-    .text-box {
+    .title-box {
       position: absolute;
-      bottom: 20%;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(0, 0, 0, 0.7);
       color: white;
-      padding: 20px;
+      padding: 10px 20px;
       border-radius: 10px;
-      max-width: 80%;
+      font-size: 45px;
       text-align: center;
+    }
+    .image-buttons {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 50px;
+    }
+    .image-button {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      cursor: pointer;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+    }
+    .popup-overlay img {
+      border-radius: 20px;
+      max-width: 90%;
+      max-height: 90%;
+    }
+    .popup-overlay .close-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: white;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -106,26 +144,87 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function(event) {
-      document.querySelector('body').style.opacity = 1
-    })
-    
     const videoData = [
-      { 
-        file: "https://codehs.com/uploads/3298fa0018597226da269f8e49d7987d", 
-        initialTransition: "https://codehs.com/uploads/8573682af5bd54fbe2870f7876168d19",
-        transition: "https://codehs.com/uploads/27ffff1ad2053dc83d889d9423f739cb", 
-        text: "The cornea focuses light entering the eye." 
+      {
+        file: "https://codehs.com/uploads/3298fa0018597226da269f8e49d7987d",
+        initialTransition: "https://codehs.com/uploads/a5360b5ea1d002f4f272ba9935547118",
+        transition: "https://codehs.com/uploads/28ec2d00488bcf96787879d646fd5e72",
+        title: "Cornea",
+        images: [
+          "https://codehs.com/uploads/4b22dcf70381f25d8880e1ead27abaa4",
+          "https://codehs.com/uploads/72fe69c6e5fcbf766dec0f5dcb2a639b",
+          "https://codehs.com/uploads/8691e35e53afdcc2776609f3c1e5e804"
+        ]
       },
-      { 
-        file: "https://codehs.com/uploads/9718d24073c4d3ffceb15dfa51faf93e", 
-        transition: "https://codehs.com/uploads/27ffff1ad2053dc83d889d9423f739cb", 
-        text: "The lens adjusts focus for clear vision." 
+      {
+        file: "https://codehs.com/uploads/803968bd5f2b31142a902cf97516791c",
+        transition: "https://codehs.com/uploads/905baca438dad7e98f86641e8b7eb0df",
+        title: "Aqueous Humor",
+        images: [
+          "https://codehs.com/uploads/4b38d774a214aea7ac970c7221c9e36a",
+          "https://codehs.com/uploads/4359c7af8f7809fda6293b3184ea61f8",
+          "https://codehs.com/uploads/e935f6a2d722cf1ce7dc4af345b5ad8f"
+        ]
       },
-      { 
-        file: "https://codehs.com/uploads/9718d24073c4d3ffceb15dfa51faf93e", 
-        transition: null, 
-        text: "The retina converts light into neural signals." 
+      {
+        file: "https://codehs.com/uploads/3298fa0018597226da269f8e49d7987d",
+        transition: "https://codehs.com/uploads/28ec2d00488bcf96787879d646fd5e72",
+        title: "Lens",
+        images: [
+          "https://codehs.com/uploads/437a5b6301fe976bbc1764a5d1a279c0",
+          "https://codehs.com/uploads/62a4d7d0886733c9b87264c3eb1c9284",
+          "https://codehs.com/uploads/b71cde99ad91026333c876efb8bf44f1"
+        ]
+      },
+      {
+        file: "https://codehs.com/uploads/803968bd5f2b31142a902cf97516791c",
+        transition: "https://codehs.com/uploads/905baca438dad7e98f86641e8b7eb0df",
+        title: "Ciliary Body",
+        images: [
+          "https://codehs.com/uploads/340bdbe3473e404a3b1bd2a3f7af36fc",
+          "https://codehs.com/uploads/e9ea0131246b8661a0152402a9422cd5",
+          "https://codehs.com/uploads/08f92a3ae3d66d3e14f5dd67110cd06a"
+        ]
+      },
+      {
+        file: "https://codehs.com/uploads/3298fa0018597226da269f8e49d7987d",
+        transition: "https://codehs.com/uploads/28ec2d00488bcf96787879d646fd5e72",
+        title: "Vitreous Humor",
+        images: [
+          "https://codehs.com/uploads/21f2303d69c4804e1eb052df06370b91",
+          "https://codehs.com/uploads/dd87842050269d613dc42e574078e811",
+          "https://codehs.com/uploads/e3e62a37dbe9e1dc70ed35e709cc9702"
+        ]
+      },
+      {
+        file: "https://codehs.com/uploads/803968bd5f2b31142a902cf97516791c",
+        transition: "https://codehs.com/uploads/905baca438dad7e98f86641e8b7eb0df",
+        title: "Choroid",
+        images: [
+          "https://codehs.com/uploads/e20517a51b737203fd9c40cd613cd9c2",
+          "https://codehs.com/uploads/e2c48889009cca7404ed19554f7f87c2",
+          "https://codehs.com/uploads/ee6876522245ecae1872b83a3c46f1a1"
+        ]
+      },
+      {
+        file: "https://codehs.com/uploads/3298fa0018597226da269f8e49d7987d",
+        transition: "https://codehs.com/uploads/28ec2d00488bcf96787879d646fd5e72",
+        title: "Optic Nerve",
+        images: [
+          "https://codehs.com/uploads/6a0a07024d069a87b207dc11c6888fea",
+          "https://codehs.com/uploads/457bb15102d67ee111f6f060cf26d9d9",
+          "https://codehs.com/uploads/29185ad2c2d7481c25fb8105857b7409"
+        ]
+      },
+      {
+        file: "https://codehs.com/uploads/803968bd5f2b31142a902cf97516791c",
+        transition: null, // could this be used for the myopia thing?
+        title: "Retina",
+        images: [
+          "https://codehs.com/uploads/5aa80bf1692cc5567b4897167164297f",
+          "https://codehs.com/uploads/aa7130bcb27fa6c8fcd76a2b08a191d2",
+          "https://codehs.com/uploads/31e1b11d284601f4b4eaa183be59ac62"
+        ]
       }
     ];
 
@@ -136,11 +235,12 @@
     const videoContainer = document.getElementById("video-container");
 
     let currentIndex = -1;
-    let nextButton, textBox;
+    let nextButton, titleBox, imageButtons;
 
     function clearUI() {
       if (nextButton) nextButton.remove();
-      if (textBox) textBox.remove();
+      if (titleBox) titleBox.remove();
+      if (imageButtonsContainer) imageButtonsContainer.remove();
     }
 
     function seamlessPlay(newSource) {
@@ -155,17 +255,75 @@
       };
     }
 
+    function createPopup(imageSrc) {
+      const popupOverlay = document.createElement("div");
+      popupOverlay.className = "popup-overlay";
+      popupOverlay.innerHTML = `
+        <img src="${imageSrc}" alt="Popup Image">
+        <button class="close-button">Close</button>
+      `;
+      document.body.appendChild(popupOverlay);
+
+      const closeButton = popupOverlay.querySelector(".close-button");
+      closeButton.addEventListener("click", () => {
+        popupOverlay.remove();
+      });
+    }
+
+    const imageButtonsContainer = document.createElement("div");
+    imageButtonsContainer.className = "image-buttons";
+    
+    // Initialize the three image buttons with fixed images
+    const imageButton1 = createImageButton("https://codehs.com/uploads/a320d7b6b86202e2c59a3bf0e6d7cfac");
+    const imageButton2 = createImageButton("https://codehs.com/uploads/d424a4c0b21b8a37f715a3a9df9ec605");
+    const imageButton3 = createImageButton("https://codehs.com/uploads/4c25aeef1ff68c71f2f00290bd38203b");
+    
+    imageButtonsContainer.append(imageButton1, imageButton2, imageButton3);
+    
+    function createImageButton(src) {
+      const imgButton = document.createElement("img");
+      imgButton.className = "image-button";
+      imgButton.src = src; // Set the fixed image source
+      return imgButton;
+    }
+    
+    // Update only the popup content for the buttons
+    function updateImageButtons(images) {
+      const buttons = [imageButton1, imageButton2, imageButton3];
+      buttons.forEach((button, index) => {
+        button.onclick = images[index]
+          ? () => createPopup(images[index]) // Show popup on click if image exists
+          : null; // No action if no corresponding image
+      });
+    }
+
+    // Example usage in the loadVideo function
+    
     function loadVideo(index) {
       clearUI();
-
-      const { file, text, transition } = videoData[index];
+    
+      const { file, title, images, transition } = videoData[index];
       seamlessPlay(file);
       videoPlayer.loop = true;
-
-      textBox = document.createElement("div");
-      textBox.className = "text-box";
-      textBox.innerText = text;
-
+    
+      titleBox = document.createElement("div");
+      titleBox.className = "title-box";
+      titleBox.innerText = title;
+    
+      // Recreate the image buttons container
+      imageButtonsContainer.innerHTML = ""; // Clear existing buttons
+      const buttons = [
+        createImageButton("https://codehs.com/uploads/a320d7b6b86202e2c59a3bf0e6d7cfac"),
+        createImageButton("https://codehs.com/uploads/d424a4c0b21b8a37f715a3a9df9ec605"),
+        createImageButton("https://codehs.com/uploads/4c25aeef1ff68c71f2f00290bd38203b"),
+      ];
+      buttons.forEach((button, index) => {
+        button.onclick = images[index]
+          ? () => createPopup(images[index]) // Show popup on click if image exists
+          : null; // No action if no corresponding image
+        imageButtonsContainer.appendChild(button);
+      });
+    
       nextButton = document.createElement("button");
       nextButton.className = "button";
       nextButton.innerText = "Next";
@@ -189,28 +347,29 @@
             overlay.innerHTML = '<h1>Thanks for Learning</h1><button id="restart-button" class="button">Restart</button>';
             overlay.style.display = "flex";
             document.getElementById("restart-button").addEventListener("click", () => {
-              location.reload();
+                document.body.style.transition = "opacity 0.5s";
+              document.body.style.opacity = "0";
+              setTimeout(() => {
+                window.location.href = "../";
+              }, 500);
             });
           };
         }
         videoPlayer.play();
       });
-
-      videoContainer.appendChild(textBox);
+    
+      videoContainer.appendChild(titleBox);
+      videoContainer.appendChild(imageButtonsContainer); // Add the recreated container
       videoContainer.appendChild(nextButton);
     }
 
+    
     startButton.addEventListener("click", () => {
       overlay.style.display = "none";
-      
-      const currentTime = videoPlayer.currentTime;
-      const duration = videoPlayer.duration;
-      
-      const timeToEndOfLoop = duration - currentTime;
-      
       videoPlayer.loop = false;
-      
       videoPlayer.onended = () => {
+        const shakespeareAudio2 = new Audio("https://codehs.com/uploads/5d7e5432a95411ebba740ad7c226ad5e");
+        shakespeareAudio2.play();
         seamlessPlay(videoData[0].initialTransition);
         videoPlayer.loop = false;
         videoPlayer.onended = () => {
