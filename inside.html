@@ -72,6 +72,19 @@
       left: 50%;
       transform: translateX(-50%);
     }
+    .sources-button {
+        background-color: #FFAC1C;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      position: absolute;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
     .button:hover {
       background-color: #218838;
     }
@@ -344,7 +357,18 @@
         } else {
           videoPlayer.onended = () => {
             clearUI();
-            overlay.innerHTML = '<h1>Thanks for Learning</h1><button id="restart-button" class="button">Restart</button>';
+            overlay.innerHTML = '<h3>Shakespare has gifted you some of his writing as a thank you for the eye exam!</h3><button id="sources-button" class="sources-button">Read Gift!</button><button id="restart-button" class="button">Restart!</button>';
+            
+            sourcesButton = document.getElementById("sources-button")
+            
+            sourcesButton.addEventListener("click", () => {
+              document.body.style.transition = "opacity 0.5s";
+              document.body.style.opacity = "0";
+              setTimeout(() => {
+                window.location.href = "./sources.html";
+              }, 500);
+            });
+            
             overlay.style.display = "flex";
             document.getElementById("restart-button").addEventListener("click", () => {
                 document.body.style.transition = "opacity 0.5s";
@@ -362,7 +386,6 @@
       videoContainer.appendChild(imageButtonsContainer); // Add the recreated container
       videoContainer.appendChild(nextButton);
     }
-
     
     startButton.addEventListener("click", () => {
       overlay.style.display = "none";
