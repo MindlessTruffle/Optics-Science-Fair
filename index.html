@@ -269,22 +269,25 @@
     <div class="image-container">
       <img id="image" src="https://codehs.com/uploads/b49cf955b3e373facccaac6789d3fb1b" alt="Eye Diagram">
       <div id="hotspot1" class="hotspot" style="top: 30%; left: 40%;">
-        <span class="tooltip">Part 1</span>
+        <span class="tooltip">Eyelids</span>
       </div>
       <div id="hotspot2" class="hotspot" style="top: 50%; left: 60%;">
-        <span class="tooltip">Part 2</span>
+        <span class="tooltip">Eye Lashes</span>
       </div>
       <div id="hotspot3" class="hotspot" style="top: 70%; left: 20%;">
-        <span class="tooltip">Part 3</span>
+        <span class="tooltip">Meibomian Glands</span>
       </div>
       <div id="hotspot4" class="hotspot" style="top: 40%; left: 50%;">
-        <span class="tooltip">Part 4</span>
+        <span class="tooltip">Lacrimal Glands</span>
       </div>
       <div id="hotspot5" class="hotspot" style="top: 60%; left: 30%;">
-        <span class="tooltip">Part 5</span>
+        <span class="tooltip">Pupil</span>
       </div>
       <div id="hotspot6" class="hotspot" style="top: 80%; left: 70%;">
-        <span class="tooltip">Part 6</span>
+        <span class="tooltip">Iris</span>
+      </div>
+      <div id="hotspot7" class="hotspot" style="top: 90%; left: 60%;">
+        <span class="tooltip">Sclera</span>
       </div>
     </div>
   </div>
@@ -326,6 +329,7 @@
     const speechBubble = document.getElementById("speech-bubble");
     const examineButton = document.getElementById("examine-button");
     const shakespeareAudio = new Audio("https://codehs.com/uploads/82ea77e501e37b0d4b875bcca46385e3");
+    
 
     speechBubble.style.cssText = `
         top: 20px;
@@ -339,41 +343,48 @@
     
     const infoContent = [
       {
-        title: "Part 1",
-        subtitle: "The Gateway to Vision",
-        description: "Helps with vision clarity.",
-        funFacts: ["Clarity is improved by the cornea!", "The cornea is the eye's outermost lens."],
+        title: "Eyelids",
+        subtitle: "Protection Layer",
+        description: "Eyelids are the thin layer of skin that you can open and close over your eyes. They protect your eyes from outside dangers and keep them from drying out.",
+        funFacts: ["The muscles that control your eyelids (the orbicularis oculi) are the fastest muscles in your body!", "On average, humans blink about 15–20 times per minute!"],
       },
       {
-        title: "Part 2",
-        subtitle: "The Light Controller",
-        description: "Adjusts light sensitivity.",
-        funFacts: ["The iris controls the size of the pupil!", "The iris is what gives your eye its color."],
+        title: "Eye Lashes",
+        subtitle: "Protection Layer",
+        description: "Eyelashes operate as dust catchers, protecting the eye from debris that can obstruct vision or cause infection or injury.",
+        funFacts: ["Eyelashes are the shortest hair on the body that grows!", "Each eyelash has a 90-day lifespan!"],
       },
       {
-        title: "Part 3",
-        subtitle: "The Natural Focus",
-        description: "Focuses light on the retina.",
-        funFacts: ["The lens changes shape to focus!", "The lens becomes less flexible with age."],
+        title: "Meibomian Glands",
+        subtitle: "Protection Layer",
+        description: "Meibomian glands produce meibum, an oily substance that prevents evaporation of the eye's tear film.",
+        funFacts: ["Each eye has about 25 to 40 meibomian glands in the upper eyelid and 20 to 30 in the lower eyelid!"],
       },
       {
-        title: "Part 4",
-        subtitle: "The Motion Detector",
-        description: "Aids peripheral vision.",
-        funFacts: ["Rods in the retina help peripheral vision!", "The retina has over 100 million rods."],
+        title: "Lacrimal Glands",
+        subtitle: "Protection Layer",
+        description: "The lacrimal gland is located within the orbit above the lateral end of the eye. It continually releases fluid which cleanses and protects the eye's surface as it lubricates and moistens it (tears).",
+        funFacts: ["Lacrimal glands produce different types of tears depending on the situation!"],
+      }, //____________________________________________________Eyes open
+      {
+        title: "Pupil",
+        subtitle: "Front",
+        description: "The pupil is the opening at the center of the iris through which light passes.",
+        funFacts: ["The pupil can expand up to 8 millimeters in diameter and shrink to about 2 millimeters!", "When you feel excited, scared, or attracted to someone, your pupils can dilate due to increased activity in your autonomic nervous system!"],
       },
       {
-        title: "Part 5",
-        subtitle: "The Color Interpreter",
-        description: "Detects color differences.",
-        funFacts: ["Cones detect colors!", "Humans have three types of cones for RGB."],
+        title: "Iris",
+        subtitle: "Front",
+        description: "The iris is the colored part of the eye surrounding the pupil. It regulates the amount of light that enters the eye by adjusting the size of the pupil.",
+        funFacts: ["The patterns and colors of your iris are unique to you, just like a fingerprint!", "Your iris color can change throughout your life!"],
       },
       {
-        title: "Part 6",
-        subtitle: "The Neural Messenger",
-        description: "Sends signals to the brain.",
-        funFacts: ["The optic nerve transmits visual info!", "The optic nerve connects to the brain's visual cortex."],
+        title: "Sclera",
+        subtitle: "Front",
+        description: "The sclera is the white outer coating of the eye. It is a tough, fibrous tissue that extends from the cornea to the optic nerve at the back of the eye.",
+        funFacts: ["The sclera helps enhance non-verbal communications and social interactions between humans!", "Humans have the most visible sclera out of all animals!"],
       },
+
     ];
 
     let currentHotspotIndex = 0;
@@ -427,16 +438,22 @@
       funFact.style.display = "block";
       funFactsButton.textContent = "See Another Fun Fact";
     });
-
+    
+    // Update the transition logic in the doneButton click handler
     doneButton.addEventListener("click", () => {
       infoPanel.style.display = "none";
-      if (currentHotspotIndex === 2) {
+      if (currentHotspotIndex === 3) {
+        // After Lacrimal Glands, switch to open eye image
         image.src = "https://codehs.com/uploads/a3b49af096fc5bf3ea3c1452b94fc4ea";
-        hotspots.slice(0, 3).forEach(dot => dot.style.display = "none");
-        hotspots[3].style.display = "block";
-      } else if (currentHotspotIndex === 5) {
+        // Hide first 4 hotspots (0-3)
+        hotspots.slice(0, 4).forEach(dot => dot.style.display = "none");
+        // Show next hotspot (Pupil)
+        hotspots[4].style.display = "block";
+      } else if (currentHotspotIndex === 6) {
+        // After Sclera, show final overlay
         finalOverlay.style.display = "flex";
       } else if (currentHotspotIndex < hotspots.length - 1) {
+        // Show next hotspot
         hotspots[currentHotspotIndex + 1].style.display = "block";
       }
     });
