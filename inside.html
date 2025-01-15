@@ -176,7 +176,7 @@
         images: [
           "https://codehs.com/uploads/4b38d774a214aea7ac970c7221c9e36a",
           "https://codehs.com/uploads/4359c7af8f7809fda6293b3184ea61f8",
-          "https://codehs.com/uploads/e935f6a2d722cf1ce7dc4af345b5ad8f"
+          "https://codehs.com/uploads/4fd00f24071ec5e2b4281d2b817e1bb3"
         ]
       },
       {
@@ -186,7 +186,7 @@
         images: [
           "https://codehs.com/uploads/437a5b6301fe976bbc1764a5d1a279c0",
           "https://codehs.com/uploads/62a4d7d0886733c9b87264c3eb1c9284",
-          "https://codehs.com/uploads/b71cde99ad91026333c876efb8bf44f1"
+          "https://codehs.com/uploads/f7f7cf8bfbe2f7b05365dcef429bbc2c"
         ]
       },
       {
@@ -196,7 +196,7 @@
         images: [
           "https://codehs.com/uploads/340bdbe3473e404a3b1bd2a3f7af36fc",
           "https://codehs.com/uploads/e9ea0131246b8661a0152402a9422cd5",
-          "https://codehs.com/uploads/08f92a3ae3d66d3e14f5dd67110cd06a"
+          "https://codehs.com/uploads/52136d826be31f79740aa8aba5a4910c"
         ]
       },
       {
@@ -216,7 +216,7 @@
         images: [
           "https://codehs.com/uploads/e20517a51b737203fd9c40cd613cd9c2",
           "https://codehs.com/uploads/e2c48889009cca7404ed19554f7f87c2",
-          "https://codehs.com/uploads/ee6876522245ecae1872b83a3c46f1a1"
+          "https://codehs.com/uploads/8d206c36726b8281eb11911b0198ef88"
         ]
       },
       {
@@ -231,12 +231,12 @@
       },
       {
         file: "https://codehs.com/uploads/803968bd5f2b31142a902cf97516791c",
-        transition: null, // could this be used for the myopia thing?
+        transition: null,
         title: "Retina",
         images: [
           "https://codehs.com/uploads/5aa80bf1692cc5567b4897167164297f",
           "https://codehs.com/uploads/aa7130bcb27fa6c8fcd76a2b08a191d2",
-          "https://codehs.com/uploads/31e1b11d284601f4b4eaa183be59ac62"
+          "https://codehs.com/uploads/d2eccf9f490782d7e4bbe0f436bc3231"
         ]
       }
     ];
@@ -286,7 +286,6 @@
     const imageButtonsContainer = document.createElement("div");
     imageButtonsContainer.className = "image-buttons";
     
-    // Initialize the three image buttons with fixed images
     const imageButton1 = createImageButton("https://codehs.com/uploads/a320d7b6b86202e2c59a3bf0e6d7cfac");
     const imageButton2 = createImageButton("https://codehs.com/uploads/d424a4c0b21b8a37f715a3a9df9ec605");
     const imageButton3 = createImageButton("https://codehs.com/uploads/4c25aeef1ff68c71f2f00290bd38203b");
@@ -296,22 +295,19 @@
     function createImageButton(src) {
       const imgButton = document.createElement("img");
       imgButton.className = "image-button";
-      imgButton.src = src; // Set the fixed image source
+      imgButton.src = src;
       return imgButton;
     }
     
-    // Update only the popup content for the buttons
     function updateImageButtons(images) {
       const buttons = [imageButton1, imageButton2, imageButton3];
       buttons.forEach((button, index) => {
         button.onclick = images[index]
-          ? () => createPopup(images[index]) // Show popup on click if image exists
-          : null; // No action if no corresponding image
+          ? () => createPopup(images[index])
+          : null;
       });
     }
 
-    // Example usage in the loadVideo function
-    
     function loadVideo(index) {
       clearUI();
     
@@ -323,8 +319,7 @@
       titleBox.className = "title-box";
       titleBox.innerText = title;
     
-      // Recreate the image buttons container
-      imageButtonsContainer.innerHTML = ""; // Clear existing buttons
+      imageButtonsContainer.innerHTML = "";
       const buttons = [
         createImageButton("https://codehs.com/uploads/a320d7b6b86202e2c59a3bf0e6d7cfac"),
         createImageButton("https://codehs.com/uploads/d424a4c0b21b8a37f715a3a9df9ec605"),
@@ -332,8 +327,8 @@
       ];
       buttons.forEach((button, index) => {
         button.onclick = images[index]
-          ? () => createPopup(images[index]) // Show popup on click if image exists
-          : null; // No action if no corresponding image
+          ? () => createPopup(images[index])
+          : null;
         imageButtonsContainer.appendChild(button);
       });
     
@@ -383,7 +378,7 @@
       });
     
       videoContainer.appendChild(titleBox);
-      videoContainer.appendChild(imageButtonsContainer); // Add the recreated container
+      videoContainer.appendChild(imageButtonsContainer);
       videoContainer.appendChild(nextButton);
     }
     
